@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- HTML5 Hello world by kirupa - http://www.kirupa.com/html5/getting_your_feet_wet_html5_pg1.htm -->
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<title>Hello...</title>
+</head>
+
+<body>
+	<pre>
+		Завдання #1:
+		Напишіть функцію typeOfArray();
+		Функція приймає масив та виводить  у консоль статистику з кількістю значень різних типів даних у ньому.
+		Наприклад виклик
+		typesOfArray([1, 'a', 'b', {}, {}]);
+		Повинен вивести у консоль:
+		
+		"Array types stat:
+		 - sting:  2 items,
+		 - number: 1 item,
+		 - object: 2 items
+		 
+		Функція повинна визначати всі типи даних: 'number', 'string', 'boolean', 'null', 'undefined', 'object'
+		<button onclick='ex_1(); return false'>Выполнить</button>
+	</pre>
+	<hr>
+<script> 
+	Array.prototype.typesOfArray = function(){
+		return this.reduce(function(obj, value, index){
+			var type = typeof value;
+			obj[type] === undefined ? (obj[type] = 1) : obj[type]++
+			return obj
+		}, {})
+	}
+	
+	function ex_1 () {
+		var types_count = [1, 'a', {}, [], undefined, true].typesOfArray()
+		for (var k in types_count){	console.log('type %s = %i', k, types_count[k]) }
+	}
+	</script>
+</body>
+</html>
