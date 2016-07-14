@@ -79,7 +79,6 @@
 		function check_range(){ return is_up ? rangeStart <= rangeStop : rangeStart >= rangeStop }
 		function iterate(){return rangeStart = is_up ? (rangeStart + rangeStep) : (rangeStart - rangeStep) }
 		for (; check_range(); iterate()) { result.push(rangeStart) }
-		if (result[result.length-1] !== rangeStop) result.push(rangeStop)
 		return result
 	}
 
