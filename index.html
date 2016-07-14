@@ -25,17 +25,72 @@
 		<button onclick='ex_1(); return false'>Выполнить</button>
 	</pre>
 	<hr>
+	<pre>
+		Завдання #2:
+		Напишіть додаткові функції для роботи з масивами:
+		
+		 - rangeToArray (rangeStart, rangeStop, rangeStep) - повертає масив чисел, від починаючи від rangeStart(включно) і закінчуючи 
+		rangeStop(включно), 
+		з кроком rangeStep. При чому, функція базуючись на аргументах сама визначає, 
+		чи буде послідовність чисел висхідною, чи низхідною. Тобто:
+		
+		console.log(rangeToArray(1, 3, 1)); // -> [1, 2, 3]
+		console.log(rangeToArray(5, 3, 1)); // -> [5, 3, 3]
+		
+		 - sumArray(). Повертає суму всіх елементів масиву
+		 console.log(sumArray([10, 20, 20])); // -> 50
+		 
+		 - multiplyArray(). Повертає добуток всіх елементів масиву
+		 console.log(multiplyArray([2, 3, 4])); // -> 24
+		 console.log(multiplyArray(rangeToArray(1, 5, 1)); // -> 120
+		 
+		 - reverseArray([1, 2, 3]). Повертає масив елементів, записаний у зворотньому порядку
+		console.log(reverseArray([1, 2, 3])); // -> [3, 2, 1]
+		<button onclick='ex_2(); return false'>Выполнить</button>
+	</pre>
+	<hr>
 <script> 
+
 	Array.prototype.typesOfArray = function(){
+		var types = {
+			undefined: '[object Undefined]',
+			array:     '[object Array]',
+			object:    '[object Object]',
+			null:      '[object Null]',
+			number:    '[object Number]',
+			string:    '[object String]',
+			boolean:   '[object Boolean]'
+		}
+		function get_type(variable){
+			var raw_type = Object.prototype.toString.call( variable )
+			var type = 'unknown_type'
+			for (i in types) { if ( types[i] === raw_type){type = i; break;} }
+			return type
+		}
 		return this.reduce(function(obj, value, index){
-			var type = typeof value;
+			var type = get_type(value);
 			obj[type] === undefined ? (obj[type] = 1) : obj[type]++
 			return obj
 		}, {})
 	}
 	
+	Array.prototype.rangeToArray = function(rangeStart, rangeStop, rangeStep){
+		var start, end, result = [], is_up = (rangeStart < rangeStop)
+		start = is_up ? rangeStart : rangeStop
+		end   = is_up ? rangeStop  : rangeStart
+
+		console.log('qweqweqwe')
+		console.log('start %s; end %s', start, end)
+		for (; is_up ? start <= end : start => end; start = is_up ? (start + rangeStep) : (start - rangeStep)) {
+			console.log('start %s', start)
+			result.push(start)
+			
+		}
+		return result
+	}
+
 	function ex_1 () {
-		var types_count = [1, 'a', {}, [], undefined, true].typesOfArray()
+		var types_count = [1, 'a', {}, [], undefined, true, null, null].typesOfArray()
 		for (var k in types_count){	console.log('type %s = %i', k, types_count[k]) }
 	}
 	</script>
