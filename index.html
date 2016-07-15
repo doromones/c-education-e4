@@ -79,6 +79,9 @@
 	Array.prototype.multiple = function(){
 		return this.reduce(function(multiple, value){ return multiple *= value})
 	}
+	Array.prototype.reverse_my = function(){
+		return this.reduceRight(function(arr, value){arr.push(value); return arr},[])
+	}
 	function rangeToArray(rangeStart, rangeStop, rangeStep){
 		var start, end, result = [], is_up = (rangeStart < rangeStop)
 		function check_range(){ return is_up ? rangeStart <= rangeStop : rangeStart >= rangeStop }
@@ -97,11 +100,13 @@
 		console.log('rangeToArray(1, 2, 10) => %s', rangeToArray(1, 2, 10))
 		console.log('rangeToArray(10, 2, 2) => %s', rangeToArray(10, 2, 2))
 		console.log('=====================================================')
-		console.log('[1,2,3,4].sum => %s', [1,2,3,4].sum())
-		console.log('[1,2,3,4,10].sum => %s', [1,2,3,4, 10].sum())
+		console.log('[1,2,3,4].sum() => %s', [1,2,3,4].sum())
+		console.log('[1,2,3,4,10].sum() => %s', [1,2,3,4, 10].sum())
 		console.log('=====================================================')
-		console.log('[1,2,3,4].sum => %s', [1,2,3,4].multiple())
-		console.log('[1,2,3,4,10].sum => %s', [1,2,3,4, 10].multiple())
+		console.log('[1,2,3,4].multiple() => %s', [1,2,3,4].multiple())
+		console.log('[1,2,3,4,10].multiple() => %s', [1,2,3,4, 10].multiple())
+		console.log('=====================================================')
+		console.log('[1,2,3,4,10].reverse_my() => %s', [1,2,3,4, 10].reverse_my())
 	}
 	</script>
 </body>
