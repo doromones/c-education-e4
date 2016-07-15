@@ -78,6 +78,7 @@
 		ви можете зміню вати його на ваш розсуд;
 		<button onclick='ex_3(); return false'>Выполнить</button>
 	</pre>
+	<hr>
 	<pre>
 		Завдання #4:
 		Оператор "==" в контексті порівняння двох об'єктів поверне 'true' лише якщо обидва аргументи є вказівниками на той самий об'єкт.
@@ -150,7 +151,8 @@
 	}
 
 	function ex_1 () {
-		var types_count = [1, 'a', {}, [], undefined, true, null, null].typesOfArray()
+		var arr = [1, 'a', {}, [], undefined, true, null, null]
+		var types_count = arr.typesOfArray()
 		for (var k in types_count){	console.log('type %s = %i', k, types_count[k]) }
 	}
 	
