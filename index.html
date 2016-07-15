@@ -73,7 +73,10 @@
 			return obj
 		}, {})
 	}
-	
+	Array.prototype.sum = function(){
+		return this.reduce(function(sum, value){ return sum += value})
+	}
+
 	function rangeToArray(rangeStart, rangeStop, rangeStep){
 		var start, end, result = [], is_up = (rangeStart < rangeStop)
 		function check_range(){ return is_up ? rangeStart <= rangeStop : rangeStart >= rangeStop }
@@ -91,6 +94,9 @@
 		console.log('rangeToArray(5, 3, 3) => %s', rangeToArray(5, 3, 3))
 		console.log('rangeToArray(1, 2, 10) => %s', rangeToArray(1, 2, 10))
 		console.log('rangeToArray(10, 2, 2) => %s', rangeToArray(10, 2, 2))
+		console.log('=====================================================')
+		console.log('[1,2,3,4].sum => %s', [1,2,3,4].sum())
+		console.log('[1,2,3,4,10].sum => %s', [1,2,3,4, 10].sum())
 	}
 	</script>
 </body>
