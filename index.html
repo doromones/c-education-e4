@@ -78,6 +78,29 @@
 		ви можете зміню вати його на ваш розсуд;
 		<button onclick='ex_3(); return false'>Выполнить</button>
 	</pre>
+	<pre>
+		Завдання #4:
+		Оператор "==" в контексті порівняння двох об'єктів поверне 'true' лише якщо обидва аргументи є вказівниками на той самий об'єкт.
+		Проте, в логічному розумінні можна сказати що два об'єкти рівні, якщо вони мають ідентичний набір ключів та властивостей. 
+		Напишіть функцію deepEqual(), аргументами якої є два об'єкти. Функція повертатиме 'true' лише у випадку, якщо обидва 
+		об'єкти є логічно рівними, тобто мають той самий набір ключів, і властивості, записані за кожним із них є ідентичними.
+		Наприклад
+		
+		var a = {
+		 name:       'John',
+		 lastname:   'Doe',
+		 age:        76
+		 };
+		 
+		var b = {
+		 name:       'John',
+		 lastname:   'Doe',
+		 age:        76,
+		};
+		
+		console.log(deepEqual(a, b)); // -> true
+		<button onclick='ex_4(); return false'>Выполнить</button>
+	</pre>
 	<hr>
 <script> 
 
@@ -122,6 +145,10 @@
 	RegExp.escape= function(s) {
 		return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 	};
+	Object.prototype.eq = function(object){
+		 return JSON.stringify(this) === JSON.stringify(object) 
+	}
+
 	function ex_1 () {
 		var types_count = [1, 'a', {}, [], undefined, true, null, null].typesOfArray()
 		for (var k in types_count){	console.log('type %s = %i', k, types_count[k]) }
@@ -164,6 +191,23 @@
 		console.log(new_text)
 		console.log(count)
 		console.log('%i, of the text are punctuation marks!', count*100/new_text.length)
+	}
+	
+	function ex_4(){
+		var a = {
+		 name:       'John',
+		 lastname:   'Doe',
+		 age:        76
+		 };
+		 
+		var b = {
+		 name:       'John',
+		 lastname:   'Doe',
+		 age:        76,
+		};
+		console.log(a)
+		console.log(b)
+		console.log('a.eq(b) => %s', a.eq(b))
 	}
 	</script>
 </body>
