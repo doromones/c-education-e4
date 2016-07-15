@@ -49,6 +49,36 @@
 		<button onclick='ex_2(); return false'>Выполнить</button>
 	</pre>
 	<hr>
+	<pre>
+		Завдання #3:
+		Реалізуйте синтаксичний аналізатор, який працює за наступними правилами:
+		Програма повинна працювати  у такій послідовності.
+		1) Спочатку, використовуючи prompt(), програма просить користувача ввести текст. Довжина тексту повинна бути від 1 до 140 символів
+		В разі помилки, ми просимо користувача ввести текс з допустимою кількістю символів. 
+		
+		2) Наш аналізатор повинен проаналізувати ввеедений користувачем текс на пердмет дублювання розділових знаків та знаків пунктувацї*.
+		Якщо ми знайшли  у тексті повторення - дублювання автоматично замінює подвоєння на один знак. 
+		
+		3) Після корекції подвоєнь, ми ще раз проходимо по тексту, та підраховуємо відсоткову кількість розділових знаків та знаків пунктуації відносно довжини тексту
+		І Виводимо у консоль результат  у форматі:
+		
+		 'Hey, here's Your original message:'
+		 
+		 '%Текст_введений_користувачем%'
+		 
+		 'We've found some mistakes, so corrected them for You:'
+		 
+		 '%Відкорегований_текст%'
+		 
+		 '%відсоток_розділових_знаків%, of the text are punctuation marks!'
+		 
+		 Примітки: 
+		 - розділові знаки, на які проводиться перевірка повинні знаходитися  у масиві:
+		 var punctuations = [',', '.', '!', '?', '-', ':', ';'];
+		ви можете зміню вати його на ваш розсуд;
+		<button onclick='ex_3(); return false'>Выполнить</button>
+	</pre>
+	<hr>
 <script> 
 
 	Array.prototype.typesOfArray = function(){
@@ -82,23 +112,25 @@
 	Array.prototype.reverse_my = function(){
 		return this.reduceRight(function(arr, value){arr.push(value); return arr},[])
 	}
-	function rangeToArray(rangeStart, rangeStop, rangeStep){
+	Array.rangeToArray = function(rangeStart, rangeStop, rangeStep){
 		var start, end, result = [], is_up = (rangeStart < rangeStop)
 		function check_range(){ return is_up ? rangeStart <= rangeStop : rangeStart >= rangeStop }
 		function iterate(){return rangeStart = is_up ? (rangeStart + rangeStep) : (rangeStart - rangeStep) }
 		for (; check_range(); iterate()) { result.push(rangeStart) }
 		return result
 	}
-
+	RegExp.escape= function(s) {
+		return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+	};
 	function ex_1 () {
 		var types_count = [1, 'a', {}, [], undefined, true, null, null].typesOfArray()
 		for (var k in types_count){	console.log('type %s = %i', k, types_count[k]) }
 	}
 	
 	function ex_2(){
-		console.log('rangeToArray(5, 3, 3) => %s', rangeToArray(5, 3, 3))
-		console.log('rangeToArray(1, 2, 10) => %s', rangeToArray(1, 2, 10))
-		console.log('rangeToArray(10, 2, 2) => %s', rangeToArray(10, 2, 2))
+		console.log('rangeToArray(5, 3, 3) => %s', Array.rangeToArray(5, 3, 3))
+		console.log('rangeToArray(1, 2, 10) => %s', Array.rangeToArray(1, 2, 10))
+		console.log('rangeToArray(10, 2, 2) => %s', Array.rangeToArray(10, 2, 2))
 		console.log('=====================================================')
 		console.log('[1,2,3,4].sum() => %s', [1,2,3,4].sum())
 		console.log('[1,2,3,4,10].sum() => %s', [1,2,3,4, 10].sum())
@@ -107,6 +139,31 @@
 		console.log('[1,2,3,4,10].multiple() => %s', [1,2,3,4, 10].multiple())
 		console.log('=====================================================')
 		console.log('[1,2,3,4,10].reverse_my() => %s', [1,2,3,4, 10].reverse_my())
+	}
+	function ex_3(){
+		var punctuations = [',', '.', '!', '?', '-', ':', ';']
+		var text = ''
+		while(!text){
+			if (text.length < 1 || text.length > 140){
+				 text = prompt('введите текст от 1 до 140 символов')
+			}
+		}
+		var new_text = text
+		punctuations.forEach(function(punct){
+			new_text = new_text.replace(new RegExp(RegExp.escape(punct) + "+", 'g'), punct)
+		});
+		console.log(text)
+		
+		var count = 0
+		punctuations.forEach(function(punct){
+			count += (new_text.match(new RegExp(RegExp.escape(punct), 'g')) || []).length
+		});
+		console.log( "Hey, here's Your original message:", text)
+		console.log(text)
+		console.log("We've found some mistakes, so corrected them for You:")
+		console.log(new_text)
+		console.log(count)
+		console.log('%i, of the text are punctuation marks!', count*100/new_text.length)
 	}
 	</script>
 </body>
